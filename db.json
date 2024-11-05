@@ -1,126 +1,124 @@
 {
   "contacts": [
-    [
-      {
-        "id": "2",
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "phoneNumber": "09123456789"
-      },
-      {
-        "id": "3",
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "phoneNumber": "09234567890"
-      },
-      {
-        "id": "4",
-        "name": "Alice Johnson",
-        "email": "alice.johnson@example.com",
-        "phoneNumber": "09345678901"
-      },
-      {
-        "id": "5",
-        "name": "Bob Brown",
-        "email": "bob.brown@example.com",
-        "phoneNumber": "09456789012"
-      },
-      {
-        "id": "6",
-        "name": "Charlie Davis",
-        "email": "charlie.davis@example.com",
-        "phoneNumber": "09567890123"
-      },
-      {
-        "id": "7",
-        "name": "David Evans",
-        "email": "david.evans@example.com",
-        "phoneNumber": "09678901234"
-      },
-      {
-        "id": "8",
-        "name": "Eve Foster",
-        "email": "eve.foster@example.com",
-        "phoneNumber": "09789012345"
-      },
-      {
-        "id": "9",
-        "name": "Frank Green",
-        "email": "frank.green@example.com",
-        "phoneNumber": "09890123456"
-      },
-      {
-        "id": "10",
-        "name": "Grace Harris",
-        "email": "grace.harris@example.com",
-        "phoneNumber": "09901234567"
-      },
-      {
-        "id": "11",
-        "name": "Hank Irving",
-        "email": "hank.irving@example.com",
-        "phoneNumber": "09012345678"
-      },
-      {
-        "id": "12",
-        "name": "Ivy Jackson",
-        "email": "ivy.jackson@example.com",
-        "phoneNumber": "09123456780"
-      },
-      {
-        "id": "13",
-        "name": "Jack King",
-        "email": "jack.king@example.com",
-        "phoneNumber": "09234567891"
-      },
-      {
-        "id": "14",
-        "name": "Karen Lee",
-        "email": "karen.lee@example.com",
-        "phoneNumber": "09345678912"
-      },
-      {
-        "id": "15",
-        "name": "Leo Martin",
-        "email": "leo.martin@example.com",
-        "phoneNumber": "09456789023"
-      },
-      {
-        "id": "16",
-        "name": "Mia Nelson",
-        "email": "mia.nelson@example.com",
-        "phoneNumber": "09567890134"
-      },
-      {
-        "id": "17",
-        "name": "Nina Owens",
-        "email": "nina.owens@example.com",
-        "phoneNumber": "09678901245"
-      },
-      {
-        "id": "18",
-        "name": "Oscar Perez",
-        "email": "oscar.perez@example.com",
-        "phoneNumber": "09789012356"
-      },
-      {
-        "id": "19",
-        "name": "Paul Quinn",
-        "email": "paul.quinn@example.com",
-        "phoneNumber": "09890123467"
-      },
-      {
-        "id": "20",
-        "name": "Quincy Roberts",
-        "email": "quincy.roberts@example.com",
-        "phoneNumber": "09901234578"
-      },
-      {
-        "id": "21",
-        "name": "Rachel Scott",
-        "email": "rachel.scott@example.com",
-        "phoneNumber": "09012345689"
-      }
-    ]
+    {
+      "id": "2",
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "phoneNumber": "09123456789"
+    },
+    {
+      "id": "3",
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "phoneNumber": "09234567890"
+    },
+    {
+      "id": "4",
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "phoneNumber": "09345678901"
+    },
+    {
+      "id": "5",
+      "name": "Bob Brown",
+      "email": "bob.brown@example.com",
+      "phoneNumber": "09456789012"
+    },
+    {
+      "id": "6",
+      "name": "Charlie Davis",
+      "email": "charlie.davis@example.com",
+      "phoneNumber": "09567890123"
+    },
+    {
+      "id": "7",
+      "name": "David Evans",
+      "email": "david.evans@example.com",
+      "phoneNumber": "09678901234"
+    },
+    {
+      "id": "8",
+      "name": "Eve Foster",
+      "email": "eve.foster@example.com",
+      "phoneNumber": "09789012345"
+    },
+    {
+      "id": "9",
+      "name": "Frank Green",
+      "email": "frank.green@example.com",
+      "phoneNumber": "09890123456"
+    },
+    {
+      "id": "10",
+      "name": "Grace Harris",
+      "email": "grace.harris@example.com",
+      "phoneNumber": "09901234567"
+    },
+    {
+      "id": "11",
+      "name": "Hank Irving",
+      "email": "hank.irving@example.com",
+      "phoneNumber": "09012345678"
+    },
+    {
+      "id": "12",
+      "name": "Ivy Jackson",
+      "email": "ivy.jackson@example.com",
+      "phoneNumber": "09123456780"
+    },
+    {
+      "id": "13",
+      "name": "Jack King",
+      "email": "jack.king@example.com",
+      "phoneNumber": "09234567891"
+    },
+    {
+      "id": "14",
+      "name": "Karen Lee",
+      "email": "karen.lee@example.com",
+      "phoneNumber": "09345678912"
+    },
+    {
+      "id": "15",
+      "name": "Leo Martin",
+      "email": "leo.martin@example.com",
+      "phoneNumber": "09456789023"
+    },
+    {
+      "id": "16",
+      "name": "Mia Nelson",
+      "email": "mia.nelson@example.com",
+      "phoneNumber": "09567890134"
+    },
+    {
+      "id": "17",
+      "name": "Nina Owens",
+      "email": "nina.owens@example.com",
+      "phoneNumber": "09678901245"
+    },
+    {
+      "id": "18",
+      "name": "Oscar Perez",
+      "email": "oscar.perez@example.com",
+      "phoneNumber": "09789012356"
+    },
+    {
+      "id": "19",
+      "name": "Paul Quinn",
+      "email": "paul.quinn@example.com",
+      "phoneNumber": "09890123467"
+    },
+    {
+      "id": "20",
+      "name": "Quincy Roberts",
+      "email": "quincy.roberts@example.com",
+      "phoneNumber": "09901234578"
+    },
+    {
+      "id": "21",
+      "name": "Rachel Scott",
+      "email": "rachel.scott@example.com",
+      "phoneNumber": "09012345689"
+    }
   ]
 }
