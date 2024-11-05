@@ -14,7 +14,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <button @click="props.onClick">
+  <button
+    class="bg-purple-600 rounded-full h-fit px-4 text-xs py-2 text-white"
+    @click="props.onClick"
+  >
     {{ props.title }}
   </button>
 </template>
