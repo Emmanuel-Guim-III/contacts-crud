@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 import AddButton from '@/components/AddButton.vue'
 import ContactModal from '@/components/ContactModal.vue'
+import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
 
 const contacts = ref([])
 const isModalOpen = ref(false)
@@ -52,14 +53,56 @@ const toggleModal = value => {
         </ContactModal>
       </div>
     </section>
-    <ul>
-      <li
-        v-for="contact in contacts"
-        :key="contact.id"
-        @click="openContactDetails(contact.id)"
-      >
-        {{ contact.name }} - {{ contact.email }} - {{ contact.phoneNumber }}
-      </li>
-    </ul>
+
+    <table class="min-w-full bg-white">
+      <thead>
+        <tr>
+          <th class="py-2 px-4 border-b">Name</th>
+          <th class="py-2 px-4 border-b">Contact Number</th>
+          <th class="py-2 px-4 border-b">Email Address</th>
+          <th class="py-2 px-4 border-b">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="contact in contacts"
+          :key="contact.id"
+          class="hover:bg-gray-100 hover:cursor-pointer"
+          @click="openContactDetails(contact.id)"
+        >
+          <td class="py-2 px-4 border-b text-center">{{ contact.name }}</td>
+          <td class="py-2 px-4 border-b text-center">
+            {{ contact.phoneNumber }}
+          </td>
+          <td class="py-2 px-4 border-b text-center">{{ contact.email }}</td>
+          <td class="py-2 px-4 border-b">
+            <div class="flex">
+              <button
+                class="w-full"
+                @click="
+                  e => {
+                    e.stopPropagation()
+                    toggleModal(true)
+                  }
+                "
+              >
+                <PencilIcon class="text-black size-4 mx-auto" />
+              </button>
+              <button
+                class="w-full"
+                @click="
+                  e => {
+                    e.stopPropagation()
+                    console.log('delete')
+                  }
+                "
+              >
+                <TrashIcon class="text-black size-4 mx-auto" />
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
