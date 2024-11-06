@@ -7,11 +7,14 @@ import { useToast } from 'vue-toast-notification'
 
 import MyButton from '@/components/MyButton.vue'
 import ContactModal from '@/components/ContactModal.vue'
-import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
 import ContactForm from '@/components/ContactForm.vue'
+import ContactTable from '@/components/ContactTable.vue'
+import ContactCards from '@/components/ContactCards.vue'
+import { QueueListIcon, Squares2X2Icon } from '@heroicons/vue/24/solid'
 
 const contacts = ref([])
 const isModalOpen = ref(false)
+const isGridMode = ref(false)
 const formData = ref({
   id: '',
   name: '',
@@ -31,20 +34,23 @@ onMounted(async () => {
   }
 })
 
+const resetForm = () => {
+  formData.value = { name: '', contactNumber: '', email: '' }
+}
+
 const handleSubmit = async contact => {
   if (contact.id) {
     await editContact(contact)
-    console.log('edit')
   } else {
-    console.log('contact.id', contact)
     await addContact(contact)
-    console.log('add')
   }
+
+  resetForm()
 }
 
 const handleEdit = contact => {
   formData.value = { ...contact }
-  toggleModal(true)
+  isModalOpen.value = true
 }
 
 const editContact = async contact => {
@@ -54,7 +60,7 @@ const editContact = async contact => {
       contact,
     )
     updateRecord(response.data)
-    toggleModal(false)
+    isModalOpen.value = false
     toast.success('Changes saved')
   } catch (error) {
     console.error('There was a problem with the request:', error)
@@ -65,7 +71,7 @@ const addContact = async contact => {
   try {
     const response = await axios.post('http://localhost:3000/contacts', contact)
     contacts.value.push(response.data)
-    toggleModal(false)
+    isModalOpen.value = false
     toast.success('Successfully added a new contact')
   } catch (error) {
     console.error('There was a problem with the request:', error)
@@ -92,18 +98,16 @@ const updateRecord = updatedContact => {
 }
 
 const handleCancel = () => {
-  formData.value = { name: '', contactNumber: '', email: '' }
-  toggleModal(false)
+  isModalOpen.value = false
+  resetForm()
 }
 
 const openContactDetails = id => {
   router.push(`/contacts/${id}`)
 }
 
-const toggleModal = value => {
-  isModalOpen.value = value
-  console.log('isModalOpen:', isModalOpen.value)
-}
+const buttonBaseClasses =
+  'size-6 mx-[6px] hover:cursor-pointer hover:text-black/70'
 </script>
 
 <template>
@@ -119,7 +123,7 @@ const toggleModal = value => {
         <div class="ml-auto">
           <MyButton
             title="Add New Contact"
-            :onClick="() => toggleModal(true)"
+            :onClick="() => (isModalOpen = true)"
           />
         </div>
 
@@ -133,55 +137,37 @@ const toggleModal = value => {
       </div>
     </section>
 
-    <table class="min-w-full bg-white">
-      <thead>
-        <tr>
-          <th class="py-2 px-4 border-b">Name</th>
-          <th class="py-2 px-4 border-b">Contact Number</th>
-          <th class="py-2 px-4 border-b">Email Address</th>
-          <th class="py-2 px-4 border-b">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="contact in contacts"
-          :key="contact.id"
-          class="hover:bg-gray-100 hover:cursor-pointer"
-          @click="openContactDetails(contact.id)"
-        >
-          <td class="py-2 px-4 border-b text-center">{{ contact.name }}</td>
-          <td class="py-2 px-4 border-b text-center">
-            {{ contact.contactNumber }}
-          </td>
-          <td class="py-2 px-4 border-b text-center">{{ contact.email }}</td>
-          <td class="py-2 px-4 border-b">
-            <div class="flex">
-              <button
-                class="w-full"
-                @click="
-                  e => {
-                    e.stopPropagation()
-                    handleEdit(contact)
-                  }
-                "
-              >
-                <PencilIcon class="text-black size-4 mx-auto" />
-              </button>
-              <button
-                class="w-full"
-                @click="
-                  e => {
-                    e.stopPropagation()
-                    deleteContact(contact.id)
-                  }
-                "
-              >
-                <TrashIcon class="text-black size-4 mx-auto" />
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="flex justify-end">
+      <Squares2X2Icon
+        :class="buttonBaseClasses + (isGridMode ? ' text-black/50' : '')"
+        @click="() => (isGridMode = true)"
+      />
+      <QueueListIcon
+        :class="buttonBaseClasses + (!isGridMode ? ' text-black/50' : '')"
+        @click="() => (isGridMode = false)"
+      />
+    </div>
+
+    <ContactTable
+      v-if="!isGridMode"
+      :contacts="contacts"
+      :onEditContact="handleEdit"
+      :onDeleteContact="deleteContact"
+      :onSelectContact="openContactDetails"
+    />
+
+    <ContactCards
+      v-if="isGridMode"
+      :contacts="contacts"
+      :onEditContact="handleEdit"
+      :onDeleteContact="deleteContact"
+      :onSelectContact="openContactDetails"
+    />
   </div>
 </template>
+
+<!-- - card mode
+- toast
+- contact details
+- improve data for transaction history
+- know about accessibility -->
