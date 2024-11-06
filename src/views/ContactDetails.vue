@@ -30,7 +30,7 @@ onMounted(async () => {
   <div v-if="contact">
     <h1>{{ contact.name }}</h1>
     <p>Email: {{ contact.email }}</p>
-    <p>Phone: {{ contact.phoneNumber }}</p>
+    <p>Phone: {{ contact.contactNumber }}</p>
   </div>
   <div v-else-if="error">
     <p>{{ error }}</p>

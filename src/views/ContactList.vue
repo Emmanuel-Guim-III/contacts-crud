@@ -20,6 +20,16 @@ onMounted(async () => {
   }
 })
 
+const handleSubmit = async contact => {
+  try {
+    const response = await axios.post('http://localhost:3000/contacts', contact)
+    contacts.value.push(response.data)
+    toggleModal(false)
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
+}
+
 const openContactDetails = id => {
   router.push(`/contacts/${id}`)
 }
@@ -48,7 +58,10 @@ const toggleModal = value => {
         </div>
 
         <ContactModal :show="isModalOpen">
-          <ContactForm :onCancel="() => toggleModal(false)" />
+          <ContactForm
+            :onCancel="() => toggleModal(false)"
+            :onSubmit="handleSubmit"
+          />
         </ContactModal>
       </div>
     </section>
@@ -71,7 +84,7 @@ const toggleModal = value => {
         >
           <td class="py-2 px-4 border-b text-center">{{ contact.name }}</td>
           <td class="py-2 px-4 border-b text-center">
-            {{ contact.phoneNumber }}
+            {{ contact.contactNumber }}
           </td>
           <td class="py-2 px-4 border-b text-center">{{ contact.email }}</td>
           <td class="py-2 px-4 border-b">
