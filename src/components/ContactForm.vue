@@ -2,9 +2,31 @@
 import { ref, defineProps } from 'vue'
 import MyButton from './MyButton.vue'
 
-const name = ref('')
-const contactNumber = ref('')
-const email = ref('')
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => ({
+      id: null,
+      name: '',
+      contactNumber: '',
+      email: '',
+    }),
+  },
+  onCancel: {
+    type: Function,
+    default: null,
+  },
+  onSubmit: {
+    type: Function,
+    default: null,
+  },
+})
+
+console.log('props.data', props.data)
+
+const name = ref(props.data.name)
+const contactNumber = ref(props.data.contactNumber)
+const email = ref(props.data.email)
 const errors = ref({
   name: '',
   contactNumber: '',
@@ -56,6 +78,7 @@ const handleSubmit = () => {
     !errors.value.email
   ) {
     const contact = {
+      id: props.data.id,
       name: name.value,
       contactNumber: contactNumber.value,
       email: email.value,
@@ -64,17 +87,6 @@ const handleSubmit = () => {
     props.onSubmit(contact)
   }
 }
-
-const props = defineProps({
-  onCancel: {
-    type: Function,
-    default: null,
-  },
-  onSubmit: {
-    type: Function,
-    default: null,
-  },
-})
 </script>
 
 <template>

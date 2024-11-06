@@ -9,6 +9,12 @@ import ContactForm from '@/components/ContactForm.vue'
 
 const contacts = ref([])
 const isModalOpen = ref(false)
+const formData = ref({
+  id: '',
+  name: '',
+  contactNumber: '',
+  email: '',
+})
 const router = useRouter()
 
 onMounted(async () => {
@@ -21,6 +27,34 @@ onMounted(async () => {
 })
 
 const handleSubmit = async contact => {
+  if (contact.id) {
+    await editContact(contact)
+    console.log('edit')
+  } else {
+    await addContact(contact)
+    console.log('add')
+  }
+}
+
+const handleEdit = contact => {
+  formData.value = { ...contact }
+  toggleModal(true)
+}
+
+const editContact = async contact => {
+  try {
+    const response = await axios.put(
+      `http://localhost:3000/contacts/${contact.id}`,
+      contact,
+    )
+    updateRecord(response.data)
+    toggleModal(false)
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
+}
+
+const addContact = async contact => {
   try {
     const response = await axios.post('http://localhost:3000/contacts', contact)
     contacts.value.push(response.data)
@@ -28,6 +62,30 @@ const handleSubmit = async contact => {
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error)
   }
+}
+
+const deleteContact = async id => {
+  try {
+    await axios.delete(`http://localhost:3000/contacts/${id}`)
+    contacts.value = contacts.value.filter(contact => contact.id !== id)
+  } catch (error) {
+    console.error('There was a problem with the fetch operation:', error)
+  }
+}
+const updateRecord = updatedContact => {
+  const index = contacts.value.findIndex(
+    contact => contact.id === updatedContact.id,
+  )
+  if (index !== -1) {
+    contacts.value[index] = updatedContact
+  } else {
+    console.error('Contact not found')
+  }
+}
+
+const handleCancel = () => {
+  formData.value = { name: '', contactNumber: '', email: '' }
+  toggleModal(false)
 }
 
 const openContactDetails = id => {
@@ -59,7 +117,8 @@ const toggleModal = value => {
 
         <ContactModal :show="isModalOpen">
           <ContactForm
-            :onCancel="() => toggleModal(false)"
+            :data="formData"
+            :onCancel="handleCancel"
             :onSubmit="handleSubmit"
           />
         </ContactModal>
@@ -94,7 +153,7 @@ const toggleModal = value => {
                 @click="
                   e => {
                     e.stopPropagation()
-                    toggleModal(true)
+                    handleEdit(contact)
                   }
                 "
               >
@@ -105,7 +164,7 @@ const toggleModal = value => {
                 @click="
                   e => {
                     e.stopPropagation()
-                    console.log('delete')
+                    deleteContact(contact.id)
                   }
                 "
               >

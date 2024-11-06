@@ -119,18 +119,6 @@
       "name": "Rachel Scott",
       "email": "rachel.scott@example.com",
       "contactNumber": "09012345689"
-    },
-    {
-      "id": "f689",
-      "name": "Emmanuel Guim III",
-      "contactNumber": "09388167333",
-      "email": "emcagu@gmail.com"
-    },
-    {
-      "id": "2378",
-      "name": "Bob",
-      "contactNumber": "09123123123",
-      "email": "bob.ong@gmail.com"
     }
   ]
 }
