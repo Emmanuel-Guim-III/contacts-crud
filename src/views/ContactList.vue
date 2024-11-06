@@ -2,9 +2,10 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
-import AddButton from '@/components/AddButton.vue'
+import MyButton from '@/components/MyButton.vue'
 import ContactModal from '@/components/ContactModal.vue'
 import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
+import ContactForm from '@/components/ContactForm.vue'
 
 const contacts = ref([])
 const isModalOpen = ref(false)
@@ -40,16 +41,14 @@ const toggleModal = value => {
         </p>
 
         <div class="ml-auto">
-          <AddButton
+          <MyButton
             title="Add New Contact"
             :onClick="() => toggleModal(true)"
           />
         </div>
 
         <ContactModal :show="isModalOpen">
-          <h2>Modal Content</h2>
-          <p>This is the content of the modal.</p>
-          <button @click="closeModal">Close</button>
+          <ContactForm :onCancel="() => toggleModal(false)" />
         </ContactModal>
       </div>
     </section>
