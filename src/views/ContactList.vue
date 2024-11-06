@@ -2,6 +2,9 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import 'vue-toast-notification/dist/theme-sugar.css'
+import { useToast } from 'vue-toast-notification'
+
 import MyButton from '@/components/MyButton.vue'
 import ContactModal from '@/components/ContactModal.vue'
 import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
@@ -15,14 +18,16 @@ const formData = ref({
   contactNumber: '',
   email: '',
 })
+
 const router = useRouter()
+const toast = useToast()
 
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:3000/contacts')
     contacts.value = response.data
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error)
+    console.error('There was a problem with the request:', error)
   }
 })
 
@@ -31,6 +36,7 @@ const handleSubmit = async contact => {
     await editContact(contact)
     console.log('edit')
   } else {
+    console.log('contact.id', contact)
     await addContact(contact)
     console.log('add')
   }
@@ -49,8 +55,9 @@ const editContact = async contact => {
     )
     updateRecord(response.data)
     toggleModal(false)
+    toast.success('Changes saved')
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error)
+    console.error('There was a problem with the request:', error)
   }
 }
 
@@ -59,8 +66,9 @@ const addContact = async contact => {
     const response = await axios.post('http://localhost:3000/contacts', contact)
     contacts.value.push(response.data)
     toggleModal(false)
+    toast.success('Successfully added a new contact')
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error)
+    console.error('There was a problem with the request:', error)
   }
 }
 
@@ -69,7 +77,7 @@ const deleteContact = async id => {
     await axios.delete(`http://localhost:3000/contacts/${id}`)
     contacts.value = contacts.value.filter(contact => contact.id !== id)
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error)
+    console.error('There was a problem with the request:', error)
   }
 }
 const updateRecord = updatedContact => {

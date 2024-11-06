@@ -72,20 +72,21 @@ const handleSubmit = () => {
   validateContactNumber()
   validateEmailField()
 
-  if (
-    !errors.value.name &&
-    !errors.value.contactNumber &&
-    !errors.value.email
-  ) {
-    const contact = {
-      id: props.data.id,
-      name: name.value,
-      contactNumber: contactNumber.value,
-      email: email.value,
-    }
+  const hasError =
+    errors.value.name || errors.value.contactNumber || errors.value.email
+  if (hasError) return
 
-    props.onSubmit(contact)
+  const contact = {
+    name: name.value,
+    contactNumber: contactNumber.value,
+    email: email.value,
   }
+
+  if (props.data.id) {
+    contact.id = props.data.id
+  }
+
+  props.onSubmit(contact)
 }
 </script>
 
