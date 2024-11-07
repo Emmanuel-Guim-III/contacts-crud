@@ -23,7 +23,7 @@ const buttonClasses = computed(() => {
     case 'primary':
       return `${baseClasses} bg-purple-600 border-purple-600`
     case 'secondary':
-      return `${baseClasses} bg-white border-2 text-purple-600 border-purple-600`
+      return `${baseClasses} bg-white border-2 !text-purple-600 border-purple-600`
     case 'danger':
       return `${baseClasses} bg-white border-red-600`
     default:

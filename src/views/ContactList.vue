@@ -15,12 +15,7 @@ import { QueueListIcon, Squares2X2Icon } from '@heroicons/vue/24/solid'
 const contacts = ref([])
 const isModalOpen = ref(false)
 const isGridMode = ref(false)
-const formData = ref({
-  id: '',
-  name: '',
-  contactNumber: '',
-  email: '',
-})
+const formData = ref({})
 
 const router = useRouter()
 const toast = useToast()
@@ -34,10 +29,6 @@ onMounted(async () => {
   }
 })
 
-const resetForm = () => {
-  formData.value = { name: '', contactNumber: '', email: '' }
-}
-
 const handleSubmit = async contact => {
   if (contact.id) {
     await editContact(contact)
@@ -45,7 +36,7 @@ const handleSubmit = async contact => {
     await addContact(contact)
   }
 
-  resetForm()
+  formData.value = {}
 }
 
 const handleEdit = contact => {
@@ -99,7 +90,7 @@ const updateRecord = updatedContact => {
 
 const handleCancel = () => {
   isModalOpen.value = false
-  resetForm()
+  formData.value = {}
 }
 
 const openContactDetails = id => {
@@ -108,6 +99,9 @@ const openContactDetails = id => {
 
 const buttonBaseClasses =
   'size-6 mx-[6px] hover:cursor-pointer hover:text-black/70'
+
+const buttonSelectedClasses =
+  ' text-black/50 hover:text-black/50 hover:cursor-default'
 </script>
 
 <template>
@@ -139,11 +133,11 @@ const buttonBaseClasses =
 
     <div class="flex justify-end">
       <Squares2X2Icon
-        :class="buttonBaseClasses + (isGridMode ? ' text-black/50' : '')"
+        :class="buttonBaseClasses + (isGridMode ? buttonSelectedClasses : '')"
         @click="() => (isGridMode = true)"
       />
       <QueueListIcon
-        :class="buttonBaseClasses + (!isGridMode ? ' text-black/50' : '')"
+        :class="buttonBaseClasses + (!isGridMode ? buttonSelectedClasses : '')"
         @click="() => (isGridMode = false)"
       />
     </div>
@@ -166,8 +160,7 @@ const buttonBaseClasses =
   </div>
 </template>
 
-<!-- - card mode
-- toast
+<!--
 - contact details
 - improve data for transaction history
 - know about accessibility -->
