@@ -76,14 +76,15 @@ const handleSubmit = () => {
     errors.value.name || errors.value.contactNumber || errors.value.email
   if (hasError) return
 
-  const contact = {
+  let contact = {
     name: name.value,
     contactNumber: contactNumber.value,
     email: email.value,
+    transactionHistory: props.data.transactionHistory,
   }
 
   if (props.data.id) {
-    contact.id = props.data.id
+    contact = { id: props.data.id, ...contact }
   }
 
   props.onSubmit(contact)
