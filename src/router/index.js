@@ -8,7 +8,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'contacts',
+      name: 'home',
       component: ContactList,
     },
     {

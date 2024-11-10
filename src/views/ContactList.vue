@@ -159,8 +159,3 @@ const buttonSelectedClasses =
     />
   </div>
 </template>
-
-<!--
-- contact details
-- improve data for transaction history
-- know about accessibility -->
