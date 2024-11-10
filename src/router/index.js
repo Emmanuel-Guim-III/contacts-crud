@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ContactList from '../views/ContactList.vue'
-import ContactView from '../views/ContactView.vue'
+import ContactDetails from '../views/ContactDetails.vue'
 import NotFound from '../views/NotFound.vue'
 
 const router = createRouter({
@@ -19,8 +19,7 @@ const router = createRouter({
     {
       path: '/contacts/:id',
       name: 'contact',
-      // component: () => import('../views/ContactView.vue'),
-      component: ContactView,
+      component: ContactDetails,
     },
     {
       path: '/:pathMatch(.*)',
